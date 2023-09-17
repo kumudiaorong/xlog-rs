@@ -66,13 +66,23 @@ pub fn trace(s: &str) {
         LOGGER.log(Level::Trace, s);
     }
 }
-pub fn warn(s: &str) {
+pub fn debug(s: &str) {
     unsafe {
-        LOGGER.log(Level::Warn, s);
+        LOGGER.log(Level::Debug, s);
     }
 }
 pub fn info(s: &str) {
     unsafe {
         LOGGER.log(Level::Info, s);
+    }
+}
+pub fn warn(s: &str) {
+    unsafe {
+        LOGGER.log(Level::Warn, s);
+    }
+}
+pub fn error(s: &str) {
+    unsafe {
+        LOGGER.log(Level::Error, s);
     }
 }
