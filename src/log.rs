@@ -34,12 +34,13 @@ impl Logger {
         // self.to.write(b"\n").unwrap();
     }
 }
-pub fn init(to: impl std::io::Write + 'static) {
+pub fn init(to: impl std::io::Write + 'static, level: Level) {
     // Box::new(to);
     unsafe {
         LOGGER = Logger {
             to: Some(Box::new(to)),
         };
+        LEVEL = level;
     }
 }
 pub fn with_file<'a>(name: &str) {
