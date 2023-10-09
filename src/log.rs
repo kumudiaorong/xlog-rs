@@ -13,6 +13,7 @@ pub enum Level {
 static mut LEVEL: Level = Level::Info;
 
 impl Logger {
+    /// Logs a message at the specified level.
     pub fn log(&mut self, level: Level, s: &str) {
         if level < unsafe { LEVEL } {
             return;
@@ -52,6 +53,7 @@ pub fn init(to: impl std::io::Write + 'static, level: Level) {
         LEVEL = level;
     }
 }
+/// Initializes the logger with a file.
 pub fn with_file<'a>(name: &str) {
     // Box::new(to);
     unsafe {
@@ -84,26 +86,31 @@ pub fn set_level(level: Level) {
 pub fn level() -> Level {
     unsafe { LEVEL }
 }
+/// Logs a message at the trace level.
 pub fn trace(s: &str) {
     unsafe {
         LOGGER.log(Level::Trace, s);
     }
 }
+/// Logs a message at the debug level.
 pub fn debug(s: &str) {
     unsafe {
         LOGGER.log(Level::Debug, s);
     }
 }
+/// Logs a message at the info level.
 pub fn info(s: &str) {
     unsafe {
         LOGGER.log(Level::Info, s);
     }
 }
+/// Logs a message at the warn level.
 pub fn warn(s: &str) {
     unsafe {
         LOGGER.log(Level::Warn, s);
     }
 }
+/// Logs a message at the error level.
 pub fn error(s: &str) {
     unsafe {
         LOGGER.log(Level::Error, s);
