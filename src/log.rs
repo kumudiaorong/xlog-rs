@@ -34,6 +34,15 @@ impl Logger {
         // self.to.write(b"\n").unwrap();
     }
 }
+/// Initializes the logger.
+///
+/// # Examples
+///
+/// ```
+/// use xlog_rs::log;
+/// log::init(std::io::stdout(), log::Level::Trace);
+/// assert_eq!(log::level(), log::Level::Trace);
+/// ```
 pub fn init(to: impl std::io::Write + 'static, level: Level) {
     // Box::new(to);
     unsafe {
@@ -57,10 +66,23 @@ pub fn with_file<'a>(name: &str) {
         };
     }
 }
+/// Sets the log level.
+///
+/// # Examples
+///
+/// ```
+/// use xlog_rs::log;
+/// log::set_level(log::Level::Trace);
+/// assert_eq!(log::level(), log::Level::Trace);
+/// ```
 pub fn set_level(level: Level) {
     unsafe {
         LEVEL = level;
     }
+}
+/// Returns the current log level.
+pub fn level() -> Level {
+    unsafe { LEVEL }
 }
 pub fn trace(s: &str) {
     unsafe {
