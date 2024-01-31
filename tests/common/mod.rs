@@ -10,6 +10,13 @@ pub fn init() {
         log::Level::Trace,
     );
 }
-pub fn assert(except: &Vec<u8>) {
-    assert_eq!(unsafe { LOG_BUF.as_mut().unwrap() }, except);
+pub fn assert(except: &str) {
+    assert_eq!(
+        unsafe {
+            String::from_utf8(LOG_BUF.as_mut().unwrap().clone())
+                .unwrap()
+                .as_str()
+        },
+        except
+    );
 }

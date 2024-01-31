@@ -3,26 +3,32 @@ mod common;
 #[test]
 fn log_test() {
     common::init();
-    log::log(log::Level::Debug, "abc");
-    common::assert(&b"[DEBUG] abc\n".to_vec());
+    log::log(format_args!("abc"));
+    common::assert("abc");
 }
 #[test]
-fn trace_test() {
+fn simple_test() {
     common::init();
-    trace!("abc");
-    common::assert(&b"[TRACE] abc\n".to_vec());
+    trace!("{}", "abc");
+    common::assert("[TRACE] abc\n");
+}
+#[test]
+fn opt_test() {
+    common::init();
     let mut some = Some(());
-    trace!(opt, some, |_| { trace!("some") }, "none");
-    common::assert(&b"[TRACE] abc\n[TRACE] some\n".to_vec());
+    let _ = trace!(opt, some, "{}", "none");
+    common::assert("");
     some = None;
-    trace!(opt, some, |_| { trace!("some") }, "none");
-    common::assert(&b"[TRACE] abc\n[TRACE] some\n[TRACE] none\n".to_vec());
+    let _ = trace!(opt, some, "{}", "none");
+    common::assert("[TRACE][OPT] none\n");
+}
+#[test]
+fn res_test() {
+    common::init();
     let mut ok = Ok(());
-    trace!(res, ok, |_| { trace!("ok") });
-    common::assert(&b"[TRACE] abc\n[TRACE] some\n[TRACE] none\n[TRACE] ok\n".to_vec());
+    let _ = trace!(res, ok, "{}", "error");
+    common::assert("");
     ok = Err("error");
-    trace!(res, ok, |_| { trace!("opt") });
-    common::assert(
-        &b"[TRACE] abc\n[TRACE] some\n[TRACE] none\n[TRACE] ok\n[TRACE] error\n".to_vec(),
-    );
+    let _ = trace!(res, ok, "{}", "error");
+    common::assert("[TRACE][RES] error [E]:error\n");
 }
