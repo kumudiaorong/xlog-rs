@@ -5,9 +5,9 @@
 //! # Examples
 //!
 //! ```
-//! use xlog_rs::warn;
+//! use xlog::warn;
 //!
-//! xlog_rs::log::init(std::io::stdout(), xlog_rs::log::Level::Trace);
+//! xlog::log::init(std::io::stdout(), xlog::log::Level::Trace);
 //!
 //! warn!("warn message");
 //! ```

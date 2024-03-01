@@ -1,5 +1,5 @@
 use std::io::Cursor;
-use xlog_rs::log;
+use xlog::log;
 static mut LOG_BUF: Option<Vec<u8>> = None;
 pub fn init() {
     unsafe {

@@ -26,7 +26,7 @@ impl Logger {
 /// # Examples
 ///
 /// ```
-/// use xlog_rs::log;
+/// use xlog::log;
 /// log::init(std::io::stdout(), log::Level::Trace);
 /// ```
 pub fn init(to: impl std::io::Write + 'static, level: Level) {
@@ -58,7 +58,7 @@ pub fn with_file(name: &str) {
 /// # Examples
 ///
 /// ```
-/// use xlog_rs::log;
+/// use xlog::log;
 /// log::set_level(log::Level::Trace);
 /// ```
 #[inline]
@@ -110,16 +110,16 @@ macro_rules! log_dispatch {
 /// #Example
 ///
 /// ```
-/// use xlog_rs::log;
-/// xlog_rs::trace!("{}", "abc");
+/// use xlog::log;
+/// xlog::trace!("{}", "abc");
 /// let mut some = Some(());
-/// let _ = xlog_rs::trace!(opt, some, "{}", "none");
+/// let _ = xlog::trace!(opt, some, "{}", "none");
 /// some = None;
-/// let _ = xlog_rs::trace!(opt, some, "{}", "none");
+/// let _ = xlog::trace!(opt, some, "{}", "none");
 /// let mut ok = Ok(());
-/// let _ = xlog_rs::trace!(res, ok, "{}", "error");
+/// let _ = xlog::trace!(res, ok, "{}", "error");
 /// ok = Err("error");
-/// let _ = xlog_rs::trace!(res, ok, "{}", "error");
+/// let _ = xlog::trace!(res, ok, "{}", "error");
 /// ```
 #[macro_export]
 macro_rules! trace {

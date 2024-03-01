@@ -1,4 +1,4 @@
-use xlog_rs::{log, trace};
+use xlog::{log, trace};
 mod common;
 #[test]
 fn log_test() {
